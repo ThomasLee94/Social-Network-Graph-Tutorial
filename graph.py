@@ -1,5 +1,6 @@
+# !python
 
-#!python
+from vertex import Vertex
 
 """ Graph Class
 A class demonstrating the essential
@@ -21,6 +22,8 @@ class Graph:
         # TODO create a new vertex
         # TODO add the new vertex to the vertex list
         # TODO return the new vertex
+
+        
 
     def getVertex(self, n):
         """return the vertex if it exists"""
