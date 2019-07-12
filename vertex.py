@@ -32,8 +32,7 @@ class Vertex(object):
 
     def __str__(self):
         """output the list of neighbors of this vertex"""
-        return str(self.id) + " adjancent to " +
-        str([x.id for x in self.neighbors])
+        return str(self.id) + " adjancent to " + str([x.id for x in self.neighbors])
 
     def getNeighbors(self):
         """return the neighbors of this vertex"""

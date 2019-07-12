@@ -9,9 +9,13 @@ facts and functionalities of graphs.
 
 class Graph:
     def __init__(self):
-        """ initializes a graph object with an empty dictionary.
+        """ 
+        initializes a graph object with an empty dictionary.
         """
-        self.vertList = {}
+        # {
+        #   "string": vertex_obj
+        # }
+        self.vertDict = {}
         self.numVertices = 0
 
     def addVertex(self, key):
@@ -23,14 +27,20 @@ class Graph:
         # TODO add the new vertex to the vertex list
         # TODO return the new vertex
 
-        
+        if key not in self.vertDict.keys():
+            self.vertDict[key] = Vertex(key)
+            self.numVertices += 1
+        return self.vertDict[key]
 
-    def getVertex(self, n):
+    def getVertex(self, key):
         """return the vertex if it exists"""
         # TODO return the vertex if it is in the graph
 
-    def addEdge(self, f, t, cost=0):
-        """add an edge from vertex f to vertex t with a cost
+        return key in self.vertDict.keys()
+
+    def addEdge(self, vertex_a: str, vertex_b: str, weight=0):
+        """
+        add an edge from vertex a to vertex b with a weight
         """
         # TODO if either vertex is not in the graph,
         # add it - or return an error (choice is up to you).
@@ -38,6 +48,18 @@ class Graph:
         # edge by making t a neighbor of f
         # and using the addNeighbor method of the Vertex class.
         # Hint: the vertex f is stored in self.vertList[f].
+
+        if vertex_a not in self.vertDict:
+            vertex_a_obj = Vertex(vertex_a)
+
+        if vertex_b not in self.vertDict:
+            vertex_b_obj = Vertex(vertex_b)
+            
+        try:
+            vertex_a_obj.addNeighbor(vertex_b_obj, weight)
+        except ValueError:
+            print("Error")
+
 
     def getVertices(self):
         """return all the vertices in the graph"""
