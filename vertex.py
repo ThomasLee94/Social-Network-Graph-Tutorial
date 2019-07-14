@@ -8,11 +8,12 @@ A helper class for the Graph class that defines vertices and vertex neighbors.
 class Vertex(object):
 
     def __init__(self, vertex):
-        """initialize a vertex and its neighbors
+        """
+        initialize a vertex and its neighbors.
 
-        neighbors: set of vertices adjacent to self,
-        stored in a dictionary with key = vertex,
-        value = weight of edge between self and neighbor.
+        neighbors: set of vertices adjacent to self, 
+        stored in a dictionary with vertex_obj-weight 
+        as a key-value pair.
         """
 
         # {
