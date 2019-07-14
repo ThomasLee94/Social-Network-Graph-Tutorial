@@ -1,11 +1,8 @@
 # !python
 
-from vertex import Vertex
+# essential facts and functionalities of graphs 
 
-""" Graph Class
-A class demonstrating the essential
-facts and functionalities of graphs.
-"""
+from vertex import Vertex
 
 class Graph:
     def __init__(self):
@@ -19,7 +16,8 @@ class Graph:
         self.numVertices = 0
 
     def addVertex(self, key: str):
-        """add a new vertex object to the graph with
+        """
+        add a new vertex object to the graph with
         the given key and return the vertex
         """
 
@@ -47,9 +45,11 @@ class Graph:
         # Hint: the vertex f is stored in self.vertList[f].
 
         if vertex_a not in self.vertDict:
+            # add vertex_a if its not in graph
             vertex_a_obj = Vertex(vertex_a)
 
         if vertex_b not in self.vertDict:
+            # add vertex_b if not in graph
             vertex_b_obj = Vertex(vertex_b)
             
         try:
