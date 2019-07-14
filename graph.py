@@ -22,19 +22,16 @@ class Graph:
         """add a new vertex object to the graph with
         the given key and return the vertex
         """
-        # TODO increment the number of vertices
-        # TODO create a new vertex
-        # TODO add the new vertex to the vertex list
-        # TODO return the new vertex
 
         if key not in self.vertDict.keys():
+            # create new vertex and add to vertex dict
             self.vertDict[key] = Vertex(key)
+            # increment number of verticles
             self.numVertices += 1
         return self.vertDict[key]
 
     def getVertex(self, key):
         """return the vertex if it exists"""
-        # TODO return the vertex if it is in the graph
 
         return key in self.vertDict.keys()
 
@@ -69,7 +66,7 @@ class Graph:
         """iterate over the vertex objects in the
         graph, to use sytax: for v in g
         """
-        return iter(self.vertList.values())
+        return iter(self.vertDict.values())
 
 
 # Driver code
