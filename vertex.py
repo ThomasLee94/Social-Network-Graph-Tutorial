@@ -1,9 +1,7 @@
 #!python
-
-""" Vertex Class
-A helper class for the Graph class that defines vertices and vertex neighbors.
-"""
-
+ 
+# Vertex Class
+    # A helper class for the Graph class that defines vertices and vertex neighbors.
 
 class Vertex(object):
 
@@ -34,17 +32,17 @@ class Vertex(object):
         """output the list of neighbors of this vertex"""
         return str(self.id) + " adjancent to " + str([x.id for x in self.neighbors])
 
-    def getNeighbors(self):
+    def getNeighbors(self) -> [object]:
         """return the neighbors of this vertex"""
 
         return self.neighbors.keys()
 
-    def getId(self):
+    def getId(self) -> object:
         """return the id of this vertex"""
 
         return self.id
 
-    def getEdgeWeight(self, vertex: object):
+    def getEdgeWeight(self, vertex: object) -> int:
         """return the weight of this edge"""
         
         return self.neighbors[vertex]

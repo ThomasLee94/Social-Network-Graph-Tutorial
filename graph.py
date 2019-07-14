@@ -13,12 +13,12 @@ class Graph:
         initializes a graph object with an empty dictionary.
         """
         # {
-        #   "string": vertex_obj
+        #   "key": vertex_obj
         # }
         self.vertDict = {}
         self.numVertices = 0
 
-    def addVertex(self, key):
+    def addVertex(self, key: str):
         """add a new vertex object to the graph with
         the given key and return the vertex
         """
@@ -30,7 +30,7 @@ class Graph:
             self.numVertices += 1
         return self.vertDict[key]
 
-    def getVertex(self, key):
+    def getVertex(self, key: str):
         """return the vertex if it exists"""
 
         return key in self.vertDict.keys()
