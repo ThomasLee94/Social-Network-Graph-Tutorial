@@ -15,6 +15,7 @@ class Graph:
         # {
         #   "key": vertex_obj
         # }
+
         self.vert_dict = {}
         self.num_vertices = 0
 
@@ -60,6 +61,18 @@ class Graph:
     def get_vertices(self):
         """return all the vertices in the graph"""
         return self.vert_dict.keys()
+    
+    def BFS(self, vertex_key: str, n: int):
+        # check if vertex exists in graph
+        if vertex_key not in self.vert_dict.keys():
+            raise ValueError("This vertex is not in graph!")
+        
+        output = list()
+        
+        for i in range(n):
+            pass
+
+        return output    
 
     def __iter__(self):
         """

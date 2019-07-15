@@ -34,7 +34,7 @@ class Vertex(object):
         return str(self.id) + " adjancent to " + str([x.id for x in self.neighbours])
 
     def get_neighbors(self) -> [object]:
-        """return the neighbors of this vertex"""
+        """returns all vertices (nodes) connected to this vertex (node)"""
 
         return self.neighbours.keys()
 
