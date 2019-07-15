@@ -20,23 +20,23 @@ class Vertex(object):
         # }
 
         self.id = vertex
-        self.neighbors = {}
+        self.neighbours = {}
 
     def add_neighbor(self, vertex: object, weight=0):
         """add a neighbor along a weighted edge"""
 
-        if vertex not in self.neighbors.keys():
+        if vertex not in self.neighbours.keys():
             # if vertex does not exist, create new key-value pair
-            self.neighbors[vertex] = weight
+            self.neighbours[vertex] = weight
 
     def __str__(self):
         """output the list of neighbors of this vertex"""
-        return str(self.id) + " adjancent to " + str([x.id for x in self.neighbors])
+        return str(self.id) + " adjancent to " + str([x.id for x in self.neighbours])
 
     def get_neighbors(self) -> [object]:
         """return the neighbors of this vertex"""
 
-        return self.neighbors.keys()
+        return self.neighbours.keys()
 
     def get_id(self) -> object:
         """return the id of this vertex"""
@@ -46,4 +46,4 @@ class Vertex(object):
     def get_edge_weight(self, vertex: object) -> int:
         """return the weight of this edge"""
         
-        return self.neighbors[vertex]
+        return self.neighbours[vertex]
