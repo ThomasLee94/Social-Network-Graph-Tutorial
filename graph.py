@@ -9,6 +9,9 @@ class Graph:
         """ 
         initialises a graph object with an empty dictionary.
         """
+
+        # vert_dict:
+        # "key" -> "John"
         # {
         #   "key": vertex_obj
         # }
@@ -31,20 +34,14 @@ class Graph:
     def get_vertex(self, key: str):
         """return the vertex if it exists"""
 
-        for vertex_key in self.vert_dict.keys():
-            if vertex_key == key:
-                return Vertex(vertex_key)
+        return key in self.vert_dict.keys()
 
     def add_edge(self, vertex_a: str, vertex_b: str, weight=0):
         """
         add an edge from vertex a to vertex b with a weight
         """
-        # TODO if either vertex is not in the graph,
-        # add it - or return an error (choice is up to you).
-        # TODO if both vertices in the graph, add the
-        # edge by making t a neighbor of f
         
-        # Error check
+        # check if vertices exist in graph
         if vertex_a not in self.vert_dict.keys():
             # raise error if vertex_a does not exist
             raise ValueError("This vertex does not exist in graph!")
@@ -52,10 +49,11 @@ class Graph:
         if vertex_b not in self.vert_dict.keys():
             # raise error if vertex_b does not exist
             raise ValueError("This vertex does not exist in graph!")
-        
-        vertex_a_obj = self.get_vertex(vertex_a)
-        vertex_b_obj = self.get_vertex(vertex_b)
-        
+
+        vertex_a_obj = self.vert_dict[vertex_a]
+        vertex_b_obj = self.vert_dict[vertex_b]
+
+        # making vertex_b a neighbour to vertex_a by adding an edge
         return vertex_a_obj.add_neighbor(vertex_b_obj, weight)
         
 
