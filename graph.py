@@ -41,6 +41,11 @@ class Graph(object):
     def add_edge(self, vertex_a: str, vertex_b: str, weight=0):
         """
             Add an edge from vertex a to vertex b with a weight
+
+            Args:
+                vertex_a: the "from" vertex, starting point of edge
+                vertex_b: the "to" vertex, end point of edge
+                weight: value of edge
         """
         
         # check if vertices exist in graph
