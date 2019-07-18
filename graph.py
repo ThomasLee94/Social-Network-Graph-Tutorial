@@ -3,6 +3,7 @@
 # essential facts and functionalities of graphs 
 
 from vertex import Vertex
+from queue import LinkedQueue
 
 class Graph(object):
     def __init__(self):
@@ -64,17 +65,52 @@ class Graph(object):
         """
         return self.vert_dict.keys()
     
-    def BFS(self, vertex_key: str, n: int):
+    def breadth_first_search_level(
+        self, vertex_key: str = "", vertex_keys: LinkedQueue(str), n: int
+        )->[str]:
+
         """
-            Return all nodes at level n starting at vertex_key as root.  
+            Args:
+                vertex_key: single str, first iteration of recursive call stack. Treat as root node.
+                vertex_keys: LinkedQueue object, a queue to keep track of neighbours.
+                n: the degrees of seperation from vertex vertex_key  
+            Returns:
+                all nodes at level n starting at vertex_key as root.  
         """
 
+        # list or dict to keep track of visited nodes
+        # only decrement when we visit all nodes in [vertex_key]
+
         # check if vertex exists in graph
-        if vertex_key not in self.vert_dict.keys():
-            raise ValueError("This vertex is not in graph!")
+        if vertex_keys:
+            for vertex_key in vertex_keys:
+                if vertex_key not in self.vert_dict:
+                    raise ValueError("This vertex is not in graph!")
+
+        # output
+        output = []
         
-        # Queue
-        LinkedList()
+        # Queue to keep track of verticies
+        queue = LinkedQueue()
+
+        # adding nieghbours of start_vertex to queue
+        for vertex_key in vertex_keys:
+            temp_list = list()
+            for neighbour in self.vert_dict[vertex_key].neighbours:
+                queue.enqueue(neighbour)
+                # setting output to all neighbours at current n level
+                temp_list.append(neighbour)
+                output = temp_list
+            
+        # decrement n, only after getting all the neighbours for 
+        n -= 1
+
+        if n < 1:
+            return output
+            
+        vertex_keys = queue.dequeue
+
+        return self.breadth_first_search_level(vertex_keys, n)
 
     def __iter__(self):
         """
@@ -88,27 +124,21 @@ class Graph(object):
 
 
 if __name__ == "__main__":
-
-    # Challenge 1: Create the graph
-
     g = Graph()
 
-    # Add your friends
-    g.add_vertex("Friend 1")
-    g.add_vertex("Friend 2")
-    g.add_vertex("Friend 3")
+    # Add verticies
+    g.add_vertex("A")
+    g.add_vertex("B")
+    g.add_vertex("C")
+    g.add_vertex("D")
+    g.add_vertex("E")
 
-    # ...  add all 10 including you ...
+    # Add edges
+    g.add_edge("A", "B")
+    g.add_edge("A", "C")
+    g.add_edge("C", "D")
+    g.add_edge("B", "D")
+    g.add_edge("C", "E")
+    g.add_edge("D", "E")
 
-    # Add connections (non weighted edges for now)
-    g.add_edge("Friend 1", "Friend 2")
-    g.add_edge("Friend 2", "Friend 3")
-
-    # Challenge 1: Output the vertices & edges
-    # Print vertices
-    print("The vertices are: ", g.get_vertices(), "\n")
-
-    print("The edges are: ")
-    for v in g:
-        for w in v.get_neighbors():
-            print("( %s , %s )" % (v.get_id(), w.get_id()))
+    breadth_first_search_level(vertex_key="A",n=2)
