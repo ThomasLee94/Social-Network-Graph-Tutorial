@@ -66,14 +66,16 @@ class Graph(object):
         return self.vert_dict.keys()
     
     def breadth_first_search_level(
-        self, vertex_key: str = "", vertex_keys: LinkedQueue(str), n: int
+        self, n: int, vertex_key: str = "", vertex_keys: LinkedQueue(str) = ""
         )->[str]:
 
         """
+            Find all neighbours from a starting vertex at breadth level n
+
             Args:
+                n: the degrees of seperation from vertex vertex_key  
                 vertex_key: single str, first iteration of recursive call stack. Treat as root node.
                 vertex_keys: LinkedQueue object, a queue to keep track of neighbours.
-                n: the degrees of seperation from vertex vertex_key  
             Returns:
                 all nodes at level n starting at vertex_key as root.  
         """
