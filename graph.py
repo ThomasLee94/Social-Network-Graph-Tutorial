@@ -65,54 +65,53 @@ class Graph(object):
         """
         return self.vert_dict.keys()
     
-    def breadth_first_search_level(
-        self, n: int, vertex_key: str = "", vertex_keys: LinkedQueue(str) = ""
-        )->[str]:
+    def breadth_first_search_level(self, n: int, vertex_key: str)->[str]:
 
         """
             Find all neighbours from a starting vertex at breadth level n
 
             Args:
                 n: the degrees of seperation from vertex vertex_key  
-                vertex_key: single str, first iteration of recursive call stack. Treat as root node.
-                vertex_keys: LinkedQueue object, a queue to keep track of neighbours.
+                vertex_key: single str, first iteration of recursive call stack. 
+                            Treat as root node, will only be inputted once.
             Returns:
                 all nodes at level n starting at vertex_key as root.  
         """
 
-        # list or dict to keep track of visited nodes
-        # only decrement when we visit all nodes in [vertex_key]
+        if n < 1:
+            return [vertex_key]
 
         # check if vertex exists in graph
-        if vertex_keys:
-            for vertex_key in vertex_keys:
-                if vertex_key not in self.vert_dict:
-                    raise ValueError("This vertex is not in graph!")
+        if vertex_key not in self.vert_dict:
+            raise ValueError("This vertex is not in graph!")
 
-        # output
-        output = []
-        
         # Queue to keep track of verticies
         queue = LinkedQueue()
+        # keeping track of visits
+        visited = set()
+        # keeping track of distance between child and parent verticies
+        distance = {
+            vertex_key: 0
+        }
+        
+        queue.enqueue(vertex_key)
+        visited.add(vertex_key)
 
-        # adding nieghbours of start_vertex to queue
-        for vertex_key in vertex_keys:
-            temp_list = list()
-            for neighbour in self.vert_dict[vertex_key].neighbours:
-                queue.enqueue(neighbour)
-                # setting output to all neighbours at current n level
-                temp_list.append(neighbour)
-                output = temp_list
-            
-        # decrement n, only after getting all the neighbours for 
-        n -= 1
+        while not queue.is_empty():
+            # Dequeue front vertex
+            vertex = queue.dequeue()
 
-        if n < 1:
-            return output
-            
-        vertex_keys = queue.dequeue
-
-        return self.breadth_first_search_level(vertex_keys, n)
+            for neighbour in self.vert_dict[vertex].neighbours:
+                if neighbour.id not in visited:
+                    # adding str's, not objects
+                    queue.enqueue(neighbour.id)
+                    visited.add(neighbour.id)
+                    # adding distance
+                    distance[neighbour.id] = 1 + distance[vertex]
+        # returned a filtered list from distance dict of values == n
+        func = lambda vertex_key: distance[vertex_key] == n 
+        start_list = distance.keys()
+        return list(filter(func, start_list))  
 
     def __iter__(self):
         """
@@ -143,4 +142,5 @@ if __name__ == "__main__":
     g.add_edge("C", "E")
     g.add_edge("D", "E")
 
-    breadth_first_search_level(vertex_key="A",n=2)
+    output = g.breadth_first_search_level(n=2,vertex_key="A")
+    print(output)
