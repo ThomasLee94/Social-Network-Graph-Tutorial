@@ -4,10 +4,10 @@
 
 from vertex import Vertex
 
-class Graph:
+class Graph(object):
     def __init__(self):
         """ 
-        initialises a graph object with an empty dictionary.
+            Initialises a graph object with an empty dictionary.
         """
 
         # vert_dict:
@@ -21,8 +21,8 @@ class Graph:
 
     def add_vertex(self, key: str) -> object:
         """
-        add a new vertex object to the graph with
-        the given key and return the vertex
+            Add a new vertex object to the graph with
+            the given key and return the vertex
         """
 
         if key not in self.vert_dict.keys():
@@ -39,7 +39,7 @@ class Graph:
 
     def add_edge(self, vertex_a: str, vertex_b: str, weight=0):
         """
-        add an edge from vertex a to vertex b with a weight
+            Add an edge from vertex a to vertex b with a weight
         """
         
         # check if vertices exist in graph
@@ -59,20 +59,22 @@ class Graph:
         
 
     def get_vertices(self):
-        """return all the vertices in the graph"""
+        """
+            Return all the vertices in the graph
+        """
         return self.vert_dict.keys()
     
     def BFS(self, vertex_key: str, n: int):
+        """
+            Return all nodes at level n starting at vertex_key as root.  
+        """
+
         # check if vertex exists in graph
         if vertex_key not in self.vert_dict.keys():
             raise ValueError("This vertex is not in graph!")
         
-        output = list()
-        
-        for i in range(n):
-            pass
-
-        return output    
+        # Queue
+        LinkedList()
 
     def __iter__(self):
         """

@@ -3,7 +3,7 @@
 # Vertex Class
     # A helper class for the Graph class that defines vertices and vertex neighbors.
 
-class Vertex(object):
+class Vertex:
 
     def __init__(self, vertex: str):
         """
