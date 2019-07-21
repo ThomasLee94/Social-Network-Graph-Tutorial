@@ -91,6 +91,7 @@ class Graph(object):
             raise ValueError("This vertex is not in graph!")
 
         # Queue to keep track of verticies
+        # Tail is front of queue
         queue = LinkedQueue()
 
         # keeping track of visits
