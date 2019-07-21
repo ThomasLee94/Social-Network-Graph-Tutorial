@@ -92,8 +92,10 @@ class Graph(object):
 
         # Queue to keep track of verticies
         queue = LinkedQueue()
+
         # keeping track of visits
         visited = set()
+
         # keeping track of distance between child and parent verticies
         distance = {
             vertex_key: 0
@@ -113,6 +115,7 @@ class Graph(object):
                     visited.add(neighbour.id)
                     # adding distance
                     distance[neighbour.id] = 1 + distance[vertex]
+                    
         # returned a filtered list from distance dict of values == n
         func = lambda vertex_key: distance[vertex_key] == n 
         start_list = distance.keys()
