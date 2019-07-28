@@ -121,6 +121,118 @@ class Graph(object):
         func = lambda vertex_key: distance[vertex_key] == n 
         start_list = distance.keys()
         return list(filter(func, start_list))  
+    
+    def find_path(self, vertex_a: str, vertex_b: str, visited_list: [str], visited_set)->[str]:
+        """
+            Executes a depth first search on the given graph.
+            Args
+                vertex_a: start vertex
+                vertex_b: to vertex
+                visited_list: keeps track of visited verticies in order of traversal
+                visited: set method to keep track of visited verticies.
+            Returns
+                If vertex_b is in any branch from vertex_a: return (True, verticies_list)
+                If vertex_b not in any branch from vertex_a: return (False, verticies_list) 
+        """
+
+        # Catch all
+        if vertex_a not in self.vert_dict:
+            raise ValueError("This vertex is not in graph!")
+        if vertex_b not in self.vert_dict:
+            raise ValueError("This vertex is not in graph!")
+
+        if vertex_a in self.vert_dict and vertex_a not in visited_set:
+            # Add vertex_a to set
+            visited_set.add(vertex_a)
+            # add vertex to visited list in order
+            visited_list.append(vertex_a)
+            # execute custome_func:
+            custom_func(vertex_a)
+            # if vertex_b is found
+            if vertex_a == vertex_b:
+                return visited_list 
+            # add neighbours of vertex_a in stack
+            for neighbour in self.vert_dict[vertex_a].adj_dict_neighbours:
+                # visit neighbours recursively
+                return self.dfs_recursive(neighbour.id, vertex_b, visited_list, visited_set, custom_func)
+        
+        
+    def find_shortest_path(self, vertex_a: str, vertex_b: str)-> [str]:
+
+        """
+            Executes a breadth for search on the given graph and 
+            finds path in order. 
+
+            Args:
+                vertex_a: from vertex.
+                vertex_b: to vertex.
+            Returns:
+                a list of visited verticies in path from vertex_a 
+                to vertex_b   
+        """
+
+        # Check if verticies exists in graph
+        if vertex_a not in self.vert_dict:
+            if vertex_b not in self.vert_dict:
+                raise ValueError("This vertex is not in graph!")
+
+        # Queue to keep track of verticies, enqueue vertex_a
+        queue = LinkedQueue(vertex_a)
+
+        # Keeping track of visits
+        visited = set()
+        # add vertex_a to set
+        visited.add(vertex_a)
+
+        # create dict to store parent and children verticies
+        # parent = {
+        #   child_vertex: parent_vertex
+        # }
+        child_parent_path = dict()
+        
+
+        # Iterating through queue
+        while not queue.is_empty():
+            # Dequeue front vertex
+            vertex = queue.dequeue()
+            
+            # sorting keys in adjacency list to evaluate vertex.id
+            keys = self.vert_dict[vertex].adj_dict_neighbours.keys()
+            sorted_keys = sorted(keys, key = lambda vertex: vertex.id)
+            # looping through neighbours
+            for neighbour in sorted_keys:
+                if neighbour.id not in visited:
+                    # adding str's, not objects
+                    queue.enqueue(neighbour.id)
+                    visited.add(neighbour.id)
+                    # creating key-value pair in parent dict
+                    child_parent_path[neighbour.id] = vertex
+                    
+        # walking backwards in "parent" dict
+        while parent != vertex_a:
+            output.append(parent)
+            parent = dict_[parent]
+        
+        # prepending vertex_a
+        output.append(vertex_a)
+        return output[::-1]
+    
+    def clique(self):
+        """
+            This class method finds a clique in the graph. 
+        """
+
+        # init set
+        clique = set()
+        # start with arbitrary vertex
+        for vertex in self.vert_dict:
+            clique.add(vertex)
+            # for neighbour in remaining verticies not in the clique
+            for neighbour in self.vert_dict[vertex].neighbours not in clique:
+                # if the neigbours of the neighbour are in the clique, it is in in the clique
+                for neighbour_ in neighbour.neigbours:
+                    if neighbour_ in clique:
+                        clique.add(neighbour_)
 
     def __iter__(self):
         """
@@ -151,5 +263,6 @@ if __name__ == "__main__":
     g.add_edge("C", "E")
     g.add_edge("D", "E")
 
-    output = g.breadth_first_search_level(n=2,vertex_key="A")
+    # output = g.breadth_first_search_level(n=2,vertex_key="A")
+    output = g.find_path()
     print(output)
