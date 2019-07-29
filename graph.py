@@ -241,28 +241,26 @@ class Graph(object):
         """
         return iter(self.vert_dict.values())
 
+def fill(graph: Graph, verticies: [str], edges_and_weight: [str]) -> Graph:
+    """
+        Fills graph based on input verticies and edges and optional weights 
+    """
 
-# Driver code
+    # creating edge_list iterable 
+    edge_list = list()
+    for edge in edges_and_weight:
+        edge_list.append(read_data.string_to_tuple(edge))
 
-
-if __name__ == "__main__":
-    g = Graph()
-
-    # Add verticies
-    g.add_vertex("A")
-    g.add_vertex("B")
-    g.add_vertex("C")
-    g.add_vertex("D")
-    g.add_vertex("E")
-
-    # Add edges
-    g.add_edge("A", "B")
-    g.add_edge("A", "C")
-    g.add_edge("C", "D")
-    g.add_edge("B", "D")
-    g.add_edge("C", "E")
-    g.add_edge("D", "E")
-
-    # output = g.breadth_first_search_level(n=2,vertex_key="A")
-    output = g.find_path()
-    print(output)
+    # add verticies
+    for vertex in verticies:
+        graph.add_vertex(vertex)
+    
+    # add edges and weights
+    for tuple_ in edge_list:
+        # if weight was not given, default to 0 
+        if len(tuple_) == 2:
+            graph.add_edge(tuple_[0], tuple_[1], 0)
+        else:
+            graph.add_edge(tuple_[0], tuple_[1], tuple_[2])
+    
+    return graph
