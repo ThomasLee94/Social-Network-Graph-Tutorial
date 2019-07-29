@@ -229,7 +229,8 @@ class Graph(object):
     
     def is_neighbour_of_all(self, vertex_a: str, clique_set: (str))->bool:
         """
-            Helper function for clique 
+            Helper function for clique, returns a bool of whether or not vertex_a
+            is a neighbour of all verticies in clique_set 
         """
 
         for vertex in clique_set:
