@@ -9,7 +9,7 @@ class Digraph(Graph):
 
     def add_edge(self, vertex_a: str, vertex_b: str, weight=0):
         """
-        add an edge between both vertex a to vertex b with a weight
+        add an edge between from only vertex a to vertex b with a weight
         """
         
         # check if vertices exist in graph

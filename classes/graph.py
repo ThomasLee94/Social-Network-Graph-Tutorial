@@ -40,7 +40,8 @@ class Graph(object):
 
     def add_edge(self, vertex_a: str, vertex_b: str, weight=0):
         """
-            Add an edge from vertex a to vertex b with a weight
+            Add an edge from vertex a to vertex b with a weight, and vice
+            versa
 
             Args:
                 vertex_a: the "from" vertex, starting point of edge
