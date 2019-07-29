@@ -64,7 +64,6 @@ class Graph(object):
         vertex_a_obj.add_neighbor(vertex_b_obj, weight)
         vertex_b_obj.add_neighbor(vertex_a_obj, weight)
         
-
     def get_vertices(self):
         """
             Return all the vertices in the graph
@@ -224,6 +223,7 @@ class Graph(object):
                 # using helper function
                 if self.is_neighbour_of_all(vertex_, clique):
                     # add vertex_clique to clique if it is a neighbour to all verticies in set
+                    print("added vertex to set")
                     clique.add(vertex_)
         return clique
     
@@ -233,7 +233,8 @@ class Graph(object):
         """
 
         for vertex in clique_set:
-            if vertex_a not in self.vert_dict[vertex].neighbours:
+            # comparing objects
+            if self.vert_dict[vertex_a] not in self.vert_dict[vertex].neighbours:
                 return False
         return True
 

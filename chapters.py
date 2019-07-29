@@ -84,13 +84,14 @@ def chapter_6(filename: str)-> set:
     graph = chapter_1(filename)
 
     verticies = graph.get_vertices()
+
     print(verticies)
     for vertex in verticies:
         print(graph.vert_dict[vertex])
 
     output_set = graph.clique()
 
-    print(f"verticies in maximal clique: {output_set}")
+    print(f"verticies in clique: {output_set}")
     return output_set
     
 # CHAPTER 1
