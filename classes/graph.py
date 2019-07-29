@@ -2,7 +2,7 @@ from classes.vertex import Vertex
 from classes.queue import LinkedQueue
 import classes.util.read_file as read_data
 import heapq as pqueue
-import math
+import random
 
 class Graph(object):
     def __init__(self):
@@ -61,7 +61,8 @@ class Graph(object):
         vertex_b_obj = self.vert_dict[vertex_b]
 
         # making vertex_b a neighbour to vertex_a by adding an edge
-        return vertex_a_obj.add_neighbor(vertex_b_obj, weight)
+        vertex_a_obj.add_neighbor(vertex_b_obj, weight)
+        vertex_b_obj.add_neighbor(vertex_a_obj, weight)
         
 
     def get_vertices(self):
@@ -207,25 +208,34 @@ class Graph(object):
     
     def clique(self):
         """
-            This class method finds the maximal clique in the graph. 
+            This class method finds a single clique in the graph. 
         """
 
         # init set
         clique = set()
 
-        # start with arbitrary vertex
-        for vertex in self.vert_dict:
-            # add id's to set
-            clique.add(vertex.id)
-            # for neighbour in remaining verticies not in the clique
-            for neighbour in self.vert_dict[vertex].neighbours:
-                if neighbour.id not in clique:
-                    # if the neigbours of the neighbour are in the clique, it is in in the clique
-                    for neighbour_ in neighbour.neigbours:
-                        if neighbour_ in clique:
-                            clique.add(neighbour.id)
-        print(clique)
+        # start with first vertex
+        vertex = list(self.vert_dict.keys())[0]
+        clique.add(vertex)
+
+        for vertex_ in self.vert_dict:
+            # check if vertex is not already in clique set
+            if vertex_ not in clique:
+                # using helper function
+                if self.is_neighbour_of_all(vertex_, clique):
+                    # add vertex_clique to clique if it is a neighbour to all verticies in set
+                    clique.add(vertex_)
         return clique
+    
+    def is_neighbour_of_all(self, vertex_a: str, clique_set: (str))->bool:
+        """
+            Helper function for clique 
+        """
+
+        for vertex in clique_set:
+            if vertex_a not in self.vert_dict[vertex].neighbours:
+                return False
+        return True
 
     def __iter__(self):
         """
