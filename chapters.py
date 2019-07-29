@@ -78,16 +78,32 @@ def chapter_5(filename: str, vertex_a: str, vertex_b: str):
 
     print(f"Vertices in shortest path: {output}")
     print(f"Number of edges in shortest path: {len(output)-1}")
+
+def chapter_6(filename: str)-> set:
+    # build graph
+    graph = chapter_1(filename)
+
+    output_set = graph.clique
+
+    print(f"verticies in maximal clique: {output_set}")
+    return output_set
     
-# chapter 1
-chapter_1("graph_data.txt")
-# chapter 2
-chapter_2("graph_data.txt", "A")
-# chapter 3
-chapter_3("graph_data.txt", "A", 3)
-# chapter 4
-visited_list = list()
-visited_set = set()
-chapter_4("graph_data.txt", "A", "C", visited_list, visited_set)
-# chapter 5
-chapter_5("graph_data.txt", "A", "D")
+# CHAPTER 1
+# chapter_1("graph_data.txt")
+
+# CHAPTER 2
+# chapter_2("graph_data.txt", "A")
+
+# CHAPTER 3
+# chapter_3("graph_data.txt", "A", 3)
+
+# CHAPTER 4
+# visited_list = list()
+# visited_set = set()
+# chapter_4("graph_data.txt", "A", "C", visited_list, visited_set)
+
+# CHAPTER 5
+# chapter_5("graph_data.txt", "A", "D")
+
+# CHAPTER 6
+chapter_6("graph_data.txt")

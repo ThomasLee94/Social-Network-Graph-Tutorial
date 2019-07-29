@@ -1,6 +1,6 @@
 #!python
 
-from linkedlist import LinkedList, Node 
+from classes.linkedlist import LinkedList, Node 
 
 class LinkedQueue(object):
 

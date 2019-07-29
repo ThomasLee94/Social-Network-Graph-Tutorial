@@ -207,20 +207,25 @@ class Graph(object):
     
     def clique(self):
         """
-            This class method finds a clique in the graph. 
+            This class method finds the maximal clique in the graph. 
         """
 
         # init set
         clique = set()
+
         # start with arbitrary vertex
         for vertex in self.vert_dict:
-            clique.add(vertex)
+            # add id's to set
+            clique.add(vertex.id)
             # for neighbour in remaining verticies not in the clique
-            for neighbour in self.vert_dict[vertex].neighbours not in clique:
-                # if the neigbours of the neighbour are in the clique, it is in in the clique
-                for neighbour_ in neighbour.neigbours:
-                    if neighbour_ in clique:
-                        clique.add(neighbour_)
+            for neighbour in self.vert_dict[vertex].neighbours:
+                if neighbour.id not in clique:
+                    # if the neigbours of the neighbour are in the clique, it is in in the clique
+                    for neighbour_ in neighbour.neigbours:
+                        if neighbour_ in clique:
+                            clique.add(neighbour.id)
+        print(clique)
+        return clique
 
     def __iter__(self):
         """
