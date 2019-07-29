@@ -1,9 +1,8 @@
-# !python
-
-# essential facts and functionalities of graphs 
-
-from vertex import Vertex
-from queue import LinkedQueue
+from classes.vertex import Vertex
+from classes.queue import LinkedQueue
+import classes.util.read_file as read_data
+import heapq as pqueue
+import math
 
 class Graph(object):
     def __init__(self):
@@ -19,6 +18,7 @@ class Graph(object):
 
         self.vert_dict = {}
         self.num_vertices = 0
+        self.num_edges = 0
 
     def add_vertex(self, key: str) -> object:
         """
@@ -70,7 +70,7 @@ class Graph(object):
         """
         return self.vert_dict.keys()
     
-    def breadth_first_search_level(self, n: int, vertex_key: str)->[str]:
+    def breadth_first_search_level(self, vertex_key: str, n: int)->[str]:
 
         """
             Find all neighbours from a starting vertex at breadth level n
@@ -146,29 +146,25 @@ class Graph(object):
             visited_set.add(vertex_a)
             # add vertex to visited list in order
             visited_list.append(vertex_a)
-            # execute custome_func:
-            custom_func(vertex_a)
             # if vertex_b is found
             if vertex_a == vertex_b:
                 return visited_list 
             # add neighbours of vertex_a in stack
             for neighbour in self.vert_dict[vertex_a].adj_dict_neighbours:
                 # visit neighbours recursively
-                return self.dfs_recursive(neighbour.id, vertex_b, visited_list, visited_set, custom_func)
+                return self.find_path(neighbour.id, vertex_b, visited_list, visited_set)
         
         
-    def find_shortest_path(self, vertex_a: str, vertex_b: str)-> [str]:
+    def find_shortest_path(self, vertex_a: str, vertex_b: str)-> object:
 
         """
-            Executes a breadth for search on the given graph and 
-            finds path in order. 
+            Executes a breadth for search on the given graph. 
 
             Args:
                 vertex_a: from vertex.
                 vertex_b: to vertex.
             Returns:
-                a list of visited verticies in path from vertex_a 
-                to vertex_b   
+                a dict of containing parent and child verticies.
         """
 
         # Check if verticies exists in graph
@@ -190,7 +186,6 @@ class Graph(object):
         # }
         child_parent_path = dict()
         
-
         # Iterating through queue
         while not queue.is_empty():
             # Dequeue front vertex
@@ -208,14 +203,7 @@ class Graph(object):
                     # creating key-value pair in parent dict
                     child_parent_path[neighbour.id] = vertex
                     
-        # walking backwards in "parent" dict
-        while parent != vertex_a:
-            output.append(parent)
-            parent = dict_[parent]
-        
-        # prepending vertex_a
-        output.append(vertex_a)
-        return output[::-1]
+        return child_parent_path
     
     def clique(self):
         """
